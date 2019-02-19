@@ -90,8 +90,11 @@ class Video extends Component {
     if (!this.state.loading) return
     this.props.onLoad(data)
     const { height, width } = data.naturalSize
-    const ratio = height === 'undefined' && width === 'undefined' ?
-      (9 / 16) : (height / width)
+    const isPortraitVideo = height > width;
+    let ratio = height === 'undefined' && width === 'undefined' ?  (9 / 16) : (height / width);
+    if (isPortraitVideo && this.props.portraitRatio) {
+      ratio = this.props.portraitRatio;
+    }
     const inlineHeight = this.props.lockRatio ?
       (Win.width / this.props.lockRatio)
       : (Win.width * ratio)
@@ -470,6 +473,7 @@ Video.propTypes = {
   rate: PropTypes.number,
   volume: PropTypes.number,
   lockRatio: PropTypes.number,
+  portraitRatio: PropTypes.number,
   logo: PropTypes.string,
   title: PropTypes.string,
   theme: PropTypes.object,
@@ -500,6 +504,7 @@ Video.defaultProps = {
   rate: 1,
   volume: 1,
   lockRatio: undefined,
+  portraitRatio: undefined,
   logo: undefined,
   title: '',
   theme: defaultTheme,
