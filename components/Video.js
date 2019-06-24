@@ -58,7 +58,7 @@ class Video extends Component {
       paused: !props.autoPlay,
       muted: false,
       fullScreen: false,
-      inlineHeight: Win.width * 0.5625,
+      inlineHeight: Win.width,
       loading: false,
       duration: 0,
       progress: 0,
@@ -373,9 +373,9 @@ class Video extends Component {
       <Animated.View
         style={[
           styles.background,
-          fullScreen ?
-            (styles.fullScreen, { height: this.animFullscreen })
-            : { height: this.animInline },
+          // fullScreen ?
+          //   (styles.fullScreen, { height: this.animFullscreen })
+          //   : { height: this.animInline },
           fullScreen ? null : style
         ]}
       >
